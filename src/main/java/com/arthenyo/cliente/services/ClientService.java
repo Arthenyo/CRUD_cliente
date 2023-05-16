@@ -20,4 +20,9 @@ public class ClientService {
         return clients.map(x -> new ClientDTO(x));
     }
 
+    public ClientDTO findById(Long id){
+        Client client = clientRepositorys.findById(id).get();
+        return new ClientDTO(client);
+    }
+
 }
