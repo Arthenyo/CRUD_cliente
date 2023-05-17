@@ -3,6 +3,7 @@ package com.arthenyo.cliente.controllers;
 import com.arthenyo.cliente.entities.Client;
 import com.arthenyo.cliente.entities.DTO.ClientDTO;
 import com.arthenyo.cliente.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/clients")
 public class ClientController {
 
     @Autowired
@@ -30,14 +31,14 @@ public class ClientController {
         return ResponseEntity.ok(dto);
     }
     @PostMapping
-    public ResponseEntity<ClientDTO> insert(@RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> insert(@Valid @RequestBody ClientDTO dto){
         dto = clientService.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto){
+    public ResponseEntity<ClientDTO> update(@PathVariable Long id,@Valid @RequestBody ClientDTO dto){
         dto = clientService.update(id, dto);
         return ResponseEntity.ok(dto);
     }

@@ -1,6 +1,9 @@
 package com.arthenyo.cliente.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 @Entity

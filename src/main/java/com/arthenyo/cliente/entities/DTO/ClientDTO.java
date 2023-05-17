@@ -1,15 +1,19 @@
 package com.arthenyo.cliente.entities.DTO;
 
 import com.arthenyo.cliente.entities.Client;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
 public class ClientDTO {
 
     private Long id;
+    @NotBlank(message = "Nome requerido")
     private String name;
     private String cpf;
     private Double income;
+    @PastOrPresent(message = "não pode ser data futura")
     private LocalDate birthDate;
     private Integer children;
 
